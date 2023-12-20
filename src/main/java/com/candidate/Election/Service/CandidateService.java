@@ -12,7 +12,7 @@ public class CandidateService {
 
     public String registerCandidate(String name) {
         electionCandidates.add(new Candidate( name, 0));
-        return "You are Registered for Election";
+        return "You are Registered for Election. All the best.";
     }
 
     public String castMyVote(String name) {
@@ -23,9 +23,9 @@ public class CandidateService {
         if(candidate.isPresent()) {
             Candidate foundCandidate = candidate.get();
             foundCandidate.setVotes(foundCandidate.getVotes()+1);
-            return "You have voted for your Candidate";
+            return "You have voted for your Candidate.";
         }else{
-            return "Sorry! We didn't find your Candidate";
+            return "Sorry! We didn't find your Candidate.";
         }
     }
 
@@ -37,9 +37,9 @@ public class CandidateService {
         if(candidate.isPresent()) {
             Candidate foundCandidate = candidate.get();
             int votes= foundCandidate.getVotes();
-            return "You have " +votes+ " votes";
+            return "You have " +votes+ " votes.";
         }else{
-            return "Sorry! We didn't find your Candidate to check votes";
+            return "Sorry! We didn't find your Candidate to check votes.";
         }
     }
 
@@ -52,12 +52,12 @@ public class CandidateService {
         if(winner.isPresent()) {
             Candidate win = winner.get();
             if(win.getVotes()==0){
-                return "No Winner yet";
+                return "No Winner yet.";
             }else {
-                return "Winner of this election is " + win.getName() + " with " + win.getVotes() + " votes!! Congratulation";
+                return "Winner of this election is " + win.getName() + " with " + win.getVotes() + " votes!! Congratulation.";
             }
         }else{
-            return "No Winner yet";
+            return "No Winner yet.";
         }
 
     }
