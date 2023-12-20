@@ -10,12 +10,12 @@ public class CandidateService {
 
     List<Candidate> electionCandidates=new ArrayList<>();
 
-    public String registerCandidate(String name) {
+    public synchronized String registerCandidate(String name) {
         electionCandidates.add(new Candidate( name, 0));
         return "You are Registered for Election. All the best.";
     }
 
-    public String castMyVote(String name) {
+    public synchronized String castMyVote(String name) {
         Optional<Candidate> candidate = electionCandidates.stream()
                 .filter(c -> c.getName().equals(name))
                 .findFirst();
@@ -29,7 +29,7 @@ public class CandidateService {
         }
     }
 
-    public String countCandidateVote(String name) {
+    public synchronized String countCandidateVote(String name) {
         Optional<Candidate> candidate = electionCandidates.stream()
                 .filter(c -> c.getName().equals(name))
                 .findFirst();
@@ -43,11 +43,11 @@ public class CandidateService {
         }
     }
 
-    public List<Candidate> countAllVotes() {
+    public synchronized List<Candidate> countAllVotes() {
         return electionCandidates;
     }
 
-    public String announceWinner() {
+    public synchronized String announceWinner() {
         Optional<Candidate> winner = electionCandidates.stream().max((c1, c2) -> Integer.compare(c1.getVotes(), c2.getVotes()));
         if(winner.isPresent()) {
             Candidate win = winner.get();
