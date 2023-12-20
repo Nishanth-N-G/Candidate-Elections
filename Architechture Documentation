@@ -1,0 +1,65 @@
+Overview
+This RESTful API serves as an election system allowing candidates to register, cast votes, and determine the winner. It's designed to handle candidate registration, voting, vote counting, and winner announcement functionalities.
+
+Authentication
+No authentication is currently implemented for accessing the API endpoints.
+
+Endpoints
+POST /registerCandidate
+Registers a candidate for the election.
+Parameters:
+name (String) - The name of the candidate.
+Response:
+Returns a message confirming successful candidate registration.
+Cast Vote
+
+PUT /castVote
+Casts a vote for a specific candidate.
+Parameters:
+name (String) - The name of the candidate to vote for.
+Response:
+Returns a message confirming the successful vote.
+Count Candidate Votes
+
+GET /countCandidateVote
+Retrieves the vote count for a specific candidate.
+Parameters:
+name (String) - The name of the candidate to check votes for.
+Response:
+Returns the number of votes for the specified candidate.
+List Votes
+
+GET /listVotes
+Retrieves a list of all candidates and their respective votes.
+Response:
+Returns a JSON array containing candidate names and their votes.
+Get Winner
+
+GET /getWinner
+Retrieves the winner of the election based on the highest number of votes.
+Response:
+Returns the name of the winning candidate along with their vote count.
+
+Data Models
+Candidate Model
+Represents a candidate participating in the election.
+
+Attributes:
+name (String) - The name of the candidate.
+votes (Integer) - The number of votes received by the candidate.
+
+Service Logic
+CandidateService
+Manages the business logic for candidate operations.
+Provides methods for candidate registration, voting, vote counting, and winner determination.
+
+Testing
+JUnit Service Test
+Includes comprehensive JUnit tests for various functionalities:
+Candidate registration, voting, vote counting, and winner announcement.
+Ensures accurate behavior and functionality of the CandidateService methods.
+
+Possible Future Updates
+Adding the database to keep persistance of the data.
+User Interface using frontend tools to help customers using website.
+
