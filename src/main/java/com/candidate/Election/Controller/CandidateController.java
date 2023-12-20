@@ -10,6 +10,8 @@ import java.util.List;
 
 @RestController
 public class CandidateController {
+
+    @Autowired
     private CandidateService candidateService;
 
     @PostMapping("/registerCandidate")
