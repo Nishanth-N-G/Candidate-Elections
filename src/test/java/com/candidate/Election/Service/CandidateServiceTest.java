@@ -24,16 +24,19 @@ class CandidateServiceTest {
     @Test
     @DisplayName("Testing Candidate Registration")
     public void testRegisterCandidate() {
-        candidateService.registerCandidate("Candidate1");
-        List<Candidate> candidates = candidateService.countAllVotes();
-        assertTrue(candidates.stream().anyMatch(c -> c.getName().equals("Candidate1")));
+        assertEquals("Candidate1 you are Registered for Election. All the best.",
+                candidateService.registerCandidate("Candidate1"));
+        assertEquals("Candidate1 you are already registered.",
+                candidateService.registerCandidate("Candidate1"));
+
     }
 
     @Test
     @DisplayName("Testing Candidate Voting")
     public void testCastMyVote() {
         candidateService.registerCandidate("Candidate2");
-        assertEquals("You have voted for your Candidate.", candidateService.castMyVote("Candidate2"));
+        assertEquals("You have voted for Candidate2", candidateService.castMyVote("Candidate2"));
+        assertEquals("Sorry! We didn't find your Candidate.", candidateService.castMyVote("Candidate20"));
     }
 
     @Test
@@ -41,7 +44,7 @@ class CandidateServiceTest {
     public void testCountCandidateVote() {
         candidateService.registerCandidate("Candidate3");
         candidateService.castMyVote("Candidate3");
-        assertEquals("You have 1 votes.", candidateService.countCandidateVote("Candidate3"));
+        assertEquals("Candidate3 have 1 votes.", candidateService.countCandidateVote("Candidate3"));
         assertEquals("Sorry! We didn't find your Candidate to check votes.",candidateService.countCandidateVote("Candidate5"));
     }
 
@@ -69,9 +72,15 @@ class CandidateServiceTest {
     @DisplayName("Testing the Winner in Election")
     public void testAnnounceWinner() {
         candidateService.registerCandidate("Candidate6");
-        assertEquals("No Winner yet.", candidateService.announceWinner());
+        assertEquals("All Candidates are with 0 votes, No Winner yet.", candidateService.announceWinner());
         candidateService.castMyVote("Candidate6");
         candidateService.castMyVote("Candidate6");
-        assertEquals("Winner of this election is Candidate6 with 2 votes!! Congratulation.", candidateService.announceWinner());
+        candidateService.registerCandidate("Candidate7");
+        candidateService.castMyVote("Candidate7");
+        assertEquals("Winner of this election is Candidate6 with 2 votes!! Congratulation.",
+                candidateService.announceWinner());
+        candidateService.castMyVote("Candidate7");
+        assertEquals("The Election is tied between Candidate6 Candidate7 ", candidateService.announceWinner());
+
     }
 }
