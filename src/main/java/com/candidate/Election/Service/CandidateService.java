@@ -19,6 +19,7 @@ public class CandidateService {
         if(candidate.isPresent()) {
             return name+" you are already registered.";
         }
+
         electionCandidates.add(new Candidate(name, 0));
         return name+" you are Registered for Election. All the best.";
     }
