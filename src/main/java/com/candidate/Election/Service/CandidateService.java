@@ -15,9 +15,9 @@ public class CandidateService {
 
     public synchronized String registerCandidate(String name) {
         if(name.isEmpty()) return "You need to enter your name for Registration.";
-        for(Candidate candidate: electionCandidates){
-            if(candidate.getName().equals(name))
-                return name+" you are already registered.";
+        Optional<Candidate> candidate= electionCandidates.stream().filter(c->c.getName().equals(name)).findAny();
+        if(candidate.isPresent()) {
+            return name+" you are already registered.";
         }
         electionCandidates.add(new Candidate(name, 0));
         return name+" you are Registered for Election. All the best.";
