@@ -78,7 +78,7 @@ public class CandidateService {
             }
             return "Winner of this election is " + win.getName() + " with " + win.getVotes() + " votes!! Congratulation.";
         }else{
-            return "No Winner yet.";
+            return "No Candidates yet.";
         }
 
     }
